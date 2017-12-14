@@ -3,7 +3,7 @@ class ExpensesController < ProtectedController
 
   # GET /expenses
   def index
-    @expenses = current_user.expenses
+    @expenses = current_user.expenses.order("#{sort_column} #{sort_direction}")
     render json: @expenses
   end
 
@@ -47,4 +47,16 @@ class ExpensesController < ProtectedController
     def expense_params
       params.require(:expense).permit(:description, :amount, :payment_date, :paid, :recurring)
     end
-end
+
+    def sortable_columns
+      ['payment_date']
+    end
+
+    def sort_column
+      sortable_columns.include?(params[:column]) ? params[:column] : 'payment_date'
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+    end
+  end
