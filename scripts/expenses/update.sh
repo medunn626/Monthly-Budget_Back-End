@@ -6,6 +6,7 @@ curl --include --request PATCH "http://localhost:4741/expenses/${ID}" \
     "description": "'"${DESCRIPTION}"'",
     "amount": "'"${AMOUNT}"'",
     "payment_date": "'"${DATE}"'",
-    "paid": "'"${PAID}"'"
+    "paid": "'"${PAID}"'",
+    "recurring": "'"${RECURRING}"'"
   }
 }'

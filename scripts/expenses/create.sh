@@ -6,6 +6,7 @@ curl --include --request POST "http://localhost:4741/expenses" \
     "description": "'"${DESCRIPTION}"'",
     "amount": "'"${AMOUNT}"'",
     "payment_date": "'"${DATE}"'",
-    "paid": "'"${PAID}"'"
+    "paid": "'"${PAID}"'",
+    "recurring": "'"${RECURRING}"'"
   }
 }'
