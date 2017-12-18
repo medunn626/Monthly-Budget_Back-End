@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171214150613) do
+ActiveRecord::Schema.define(version: 20171218150915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,16 @@ ActiveRecord::Schema.define(version: 20171214150613) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "content"
+  end
+
+  create_table "budgets", force: :cascade do |t|
+    t.integer "starting_budget"
+    t.integer "amount_spent"
+    t.integer "remaining_budget"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_budgets_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -56,6 +66,7 @@ ActiveRecord::Schema.define(version: 20171214150613) do
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
+  add_foreign_key "budgets", "users"
   add_foreign_key "examples", "users"
   add_foreign_key "expenses", "users"
 end
